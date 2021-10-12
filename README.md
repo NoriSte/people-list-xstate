@@ -1,6 +1,11 @@
 # People list Finite State Machine
 
-![A screeshot of the machine, created through the XState Viz](./assets/machine.jpg "Machine screenshot")
+![A screenshot of the machine, created through the XState Viz](./assets/machine.jpg "Machine screenshot")
+![A screenshot of the App](./assets/app-screenshot.png "App screenshot")
+
+Available scripts:
+- `npm start` to play with the App
+- `npm test` to run the machine' tests
 
 ## Design decisions
 
