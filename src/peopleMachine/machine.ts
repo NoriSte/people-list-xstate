@@ -4,10 +4,13 @@ import { fetchPeople } from '../fakeServer'
 import { assign, createMachine } from 'xstate'
 
 import { inspect } from '@xstate/inspect'
-inspect({
-  url: 'https://statecharts.io/inspect',
-  iframe: false,
-})
+
+if (process.env.NODE_ENV === 'development') {
+  inspect({
+    url: 'https://statecharts.io/inspect',
+    iframe: false,
+  })
+}
 
 export const initialContext: InitialContext = {
   people: [],

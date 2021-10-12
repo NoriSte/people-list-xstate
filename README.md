@@ -1,8 +1,10 @@
 # People list Finite State Machine
 
+![A screeshot of the machine, created through the XState Viz](./assets/machine.jpg "Machine screenshot")
+
 ## Design decisions
 
-First of all, why **XState**: even if I'm not an XState expert yet, I like it because I think it's a superior tool to manage, read, and document Finite State Machines, compared to reading "long" `useReducer` code or jumping through React hooks trying to understand what every `useEffect` does. I think that's [David Khourshid's "Redux is half of a pattern"](https://dev.to/davidkpiano/redux-is-half-of-a-pattern-1-2-1hd7) is good reading for this topic, I got inspired by this article and by my willingness to gain experience with XState, aiming to understand if I/we like the development pattern XState introduces carefully. Please note that we recently started using it at work, and I'm currently driving an XState Working Group.
+First of all, why **XState**: even if I'm not an XState expert yet, I chose it because I think it's a superior tool to manage, read, and document Finite State Machines, compared to reading "long" `useReducer` code or jumping through React hooks trying to understand what every `useEffect` does. I think that's  [David Khourshid's "Redux is half of a pattern"](https://dev.to/davidkpiano/redux-is-half-of-a-pattern-1-2-1hd7) is good reading for this topic. I got inspired by this article and by my willingness to gain experience with XState, to understand if I/we like the development pattern XState introduces carefully. Please note that we recently started using it at work, and I'm currently driving an XState Working Group.
 
 ### Machine
 
@@ -81,7 +83,7 @@ export type States =
   | { value: 'failure'; context: Context & FailureContext }
 ```
 
-- **event categories**: in the `types` file, the events are categorized based on
+- **event categories**: in the `types` module, the events are categorized based on
   - the internal events, especially the ones that bring data
   - the external events triggered directly by the user
   - the external events not triggered directly by the user (ex. the `START` event that moves the machine away from its idle state)
