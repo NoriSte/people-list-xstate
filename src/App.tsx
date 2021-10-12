@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { MachineRoot } from './peopleMachine'
+import { PeopleRoot } from './People'
+import './styles.css'
 
-function App() {
+function Title() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>XState - People lists</h1>
+      <p>Please, check out the README.md</p>
     </div>
-  );
+  )
 }
 
-export default App;
+export default function App() {
+  return (
+    <>
+      <Title />
+      <MachineRoot>
+        <PeopleRoot />
+      </MachineRoot>
+    </>
+  )
+}
+
+// TODO:
+// [x] add simple react app
+// [x] fix TS errors
+// [x] add debounce
+// [ ] add tests (in progress)
+// [ ] document everyghing
+
+// debugging
+/*
+const service = interpret(peopleMachine).onTransition(state => {
+  console.log(state.value, state.context)
+})
+
+service.start()
+
+service.send('START')
+// service.send('TOGGLE')
+*/
