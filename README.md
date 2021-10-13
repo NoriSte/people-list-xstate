@@ -3,6 +3,8 @@
 ![A screenshot of the machine, created through the XState Viz](./assets/machine.jpg "Machine screenshot")
 ![A screenshot of the App](./assets/app-screenshot.png "App screenshot")
 
+You can [play and inspect the machine on CodeSandbox](https://codesandbox.io/s/github/NoriSte/people-list-xstate).
+
 Available scripts:
 - `npm start` to play with the App
 - `npm test` to run the machine' tests
@@ -12,6 +14,8 @@ Available scripts:
 First of all, why **XState**: even if I'm not an XState expert yet, I chose it because I think it's a superior tool to manage, read, and document Finite State Machines, compared to reading "long" `useReducer` code or jumping through React hooks trying to understand what every `useEffect` does. I think that's  [David Khourshid's "Redux is half of a pattern"](https://dev.to/davidkpiano/redux-is-half-of-a-pattern-1-2-1hd7) is good reading for this topic. I got inspired by this article and by my willingness to gain experience with XState, to understand if I/we like the development pattern XState introduces carefully. Please note that we recently started using it at work, and I'm currently driving an XState Working Group.
 
 ### Machine
+
+Here is [the full code of the Finite State Machine](./src/peopleMachine/machine.ts).
 
 The design patterns used in the code of the Finite State Machine are:
 
@@ -61,7 +65,10 @@ export const machine = createMachine<Context, Events, States>(
 )
 ```
 
+Here is [the full code of the Finite State Machine](./src/peopleMachine/machine.ts).
 ### Types
+
+Here are [the full type definitions](./src/peopleMachine/types.ts).
 
 The design patterns used for the Finite State Machine' types are:
 
@@ -103,6 +110,8 @@ export type Events = InternalEvents | ExternalEvents | UserEvents
 
 ### Tests
 
+Here is [the full code of the tests](./src/peopleMachine/machine.test.ts).
+
 The design patterns used for the tests of the Finite State Machine are:
 
 - **strong readability**: I care a lot about tests' readability because they're the tools used to understand how the code works, and they must have a complexity level 10x lower than the code under test. The topic is quite subjective, obviously, but I tried my best to ease the future developers that
@@ -111,7 +120,7 @@ The design patterns used for the tests of the Finite State Machine are:
 
 The latter case is the most problematic. Usually, I tried to get the tests as clear as possible to ease the work of the fixing-tests developer that needs an immediate idea of how the tests work to fix them as fast as possible.
 
-- **local mock data**: this point is strictly related to the "readability" one. I think that if the mock data are simple, they must stay in the same file to avoid external dependencies (take a look at `defaultFetchData` in `machine.test.ts`).
+- **local mock data**: this point is strictly related to the "readability" one. If the mock data are simple, they must stay in the same file to avoid external dependencies (take a look at `defaultFetchData` in `machine.test.ts`).
 
 - **linear testing flow and internal events**: the [Testing services chapter of the Testing Machines docs](https://xstate.js.org/docs/guides/testing.html#testing-services) pushes the developer to test a service-based machine like the following
 
@@ -158,7 +167,7 @@ expect(service.state).toMatchObject({
 })
 ```
 
-- **`createMockedMachine utility`**: I first written all the tests, then carefully analyzed which code was common for all the tests that worsened their readability. The `createMockedMachine` utility creates a minimal configured machine but returns some utilities that allow controlling the fake `fetchPeople` service.
+- **`createMockedMachine utility`**: I first written all the tests, then carefully analyzed which code was common for all the tests that worsened their readability. The `createMockedMachine` utility creates a minimal configured machine but returns some utilities that control the fake `fetchPeople` service.
 
 - **clear testing blocks**: every test, short or long, have clear `ARRANGE/ACT/ASSERT` blocks
 
@@ -311,7 +320,7 @@ The fact that the running machine is available through a React Context is an imp
 
 ## Features
 
-The proposed Finite State Macihne is strictly coupled to the UI of the People list. It allows:
+The proposed Finite State Machine is strictly coupled to the UI of the People list. It allows:
 
 - to fetch the People when the machine starts
 
@@ -327,7 +336,7 @@ The proposed Finite State Macihne is strictly coupled to the UI of the People li
 
 - to retry the previously failed request
 
-- to cancel the previous requests. The search/filter inputs aren't disabled when there is an ongoing fetch, cancelling the previous fetches avoids managing their race conditions
+- to cancel the previous requests. The search/filter inputs aren't disabled when there is an ongoing fetch. Canceling the previous fetches avoids managing their race conditions
 
 Features not included that could be considered in the future:
 
